@@ -1,0 +1,16 @@
+{
+  "name": "hex-arena",
+  "version": "1.0.0",
+  "description": "Una descripción de tu aplicación",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+  "postinstall": "touch highscore.txt && chmod 666 highscore.txt"
+
+
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.1.3"
+  }
+}
