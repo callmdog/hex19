@@ -1,0 +1,689 @@
+/* ///////////// STYLES!!!!!!!!!!!!!!!!!!!!!!!!!  ////////////////// */
+
+/* ///////////// HIGHSCORE DIV RECUADRO  ////////////////// */
+/* ///////////// HIGHSCORE DIV RECUADRO  ////////////////// */
+/* ///////////// HIGHSCORE DIV RECUADRO  ////////////////// */
+#highscoreDiv {
+border-radius: 20px;
+background: linear-gradient(45deg, #000000, #3D5032); /* Degradado de naranja a amarillo */
+padding: 20px;
+display: none;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 300px;
+z-index: 999; 
+}
+/* X CLOSE BUTTON!!! */ 
+#closeHighscore {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: transparent; 
+  cursor: pointer; 
+  border-radius: 20px;
+}
+#closeHighscore:hover {
+background-color: red; /* Cambia el color de fondo al pasar el cursor */
+box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Añade una sombra más pronunciada */
+}
+#closeHighscore img {
+height: 20px;  /* Establece una altura fija */
+width: auto;   /* Ajusta el ancho automáticamente para mantener la proporción */
+max-width: 80%; /* Limita el ancho máximo al 80% del contenedor */
+object-fit: contain; /* Asegura que la imagen se ajuste correctamente */
+} 
+  
+}
+#scorelist {
+margin-top: 20px;
+}
+
+#scorelistS {
+max-height: 400px;
+overflow-y: auto;  
+}
+
+.score-item {
+font-size: 20px;
+margin: 5px 0;
+text-shadow: 2px 2px 5px blue;   
+}
+
+/* ///////////// BOTONES INICIO HOME SCREEN  ////////////////// */
+/* ///////////// BOTONES INICIO HOME SCREEN  ////////////////// */
+/* ///////////// BOTONES INICIO HOME SCREEN  ////////////////// */
+#homeScreenButtons {
+flex-direction: column;
+display: flex;
+justify-content: center; /* Centra horizontalmente */
+align-items: center; /* Centra verticalmente */
+}
+
+#submitButton img, 
+#customPlayer img, 
+#highscoreButton img{
+height: 40px;
+width: auto;
+}
+
+#submitButton {
+display: flex;
+width: auto;
+padding: 4px 4px; /* Ajusta el relleno según sea necesario */
+font-size: 16px;
+background-color: #50C878; /* Color de fondo */
+color: white; /* Color del texto */
+border: none; /* Quita el borde */
+margin-bottom:10px;
+border-radius: 5px; /* Añade bordes redondeados */
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Añade sombra */
+cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+transition: background-color 0.3s, box-shadow 0.3s; /* Agrega transiciones suaves */
+}
+#submitButton:hover {
+background-color: #4F7942;
+box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); 
+}
+
+#customPlayer{
+display: flex;
+margin-bottom:10px;
+width: auto;
+padding: 4px 4px; /* Ajusta el relleno según sea necesario */
+font-size: 16px;
+background-color: #cb9800; /* Color de fondo */
+color: white; /* Color del texto */
+border: none; /* Quita el borde */
+border-radius: 5px; /* Añade bordes redondeados */
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Añade sombra */
+cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+transition: background-color 0.3s, box-shadow 0.3s; /* Agrega transiciones suaves */
+}
+#customPlayer:hover {
+background-color: #ac9f41; /* Cambia el color de fondo al pasar el cursor */
+box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Añade una sombra más pronunciada */
+}
+
+#highscoreButton {
+display: flex;
+width: auto;
+padding: 4px 4px; 
+font-size: 16px;
+background-color: #04135a; 
+color: white; 
+border: none; 
+margin-bottom:10px;
+border-radius: 5px; 
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+cursor: pointer; 
+transition: background-color 0.3s, box-shadow 0.3s; 
+}
+#highscoreButton:hover {
+background-color: #2f2c79;
+box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); 
+}
+
+/* ///////////// INSTRUCCIONES HOME SCREEN  ////////////////// */
+/* ///////////// INSTRUCCIONES HOME SCREEN  ////////////////// */
+/* ///////////// INSTRUCCIONES HOME SCREEN  ////////////////// */
+#greenCircle {
+display: block;
+margin: 20px auto;
+}
+#greenCirlceI {
+display: flex;
+align-items: center;
+justify-content: center;
+/*margin-left: 20px;
+margin-right: 20px;*/
+width: 80vw;
+}
+#greenCirlceI div {
+display: flex;
+align-items: center;
+}
+#text {
+color: white;
+transition: opacity 1s;
+line-height: 1; 
+text-shadow: 2px 2px 5px blue;     
+}
+.hidden {
+opacity: 0;
+}
+
+/* ///////////// SKIN RANDOM BALLS  ////////////////// */
+/* ///////////// SKIN RANDOM BALLS  ////////////////// */
+/* ///////////// SKIN RANDOM BALLS  ////////////////// */
+/* ///////////// SKIN RANDOM BALLS  ////////////////// */
+#selectSkin {
+border-radius: 20px;
+background: linear-gradient(45deg, #000000, #00008B); /* Degradado de naranja a amarillo */
+padding: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 300px;
+z-index: 999;
+}
+#selectedSkin {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 10px;
+width: 100%;
+max-height: 300px;
+overflow-y: auto;
+}
+.skin {
+border-radius: 20px;
+width: 70px;
+height: 70px;
+padding: 10px;
+background-color: white;
+border: 1px solid black;
+box-sizing: border-box;
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+}
+.skin.selected {
+background-color: gray;
+}
+#selectSkin h3 {
+margin-top: 0;
+margin-bottom: 20px; /* Puedes ajustar este margen según necesites */
+text-shadow: 2px 2px 4px rgba(33, 150, 243, 0.8); /* Sombra azul */
+}
+#skinButtons {
+display: flex;
+width: 100%;
+height: 100%;
+margin-top: 10px;
+}
+#skinButtons2 {
+display: flex;
+width: 100%;
+height: 100%;
+margin-bottom: 10px;
+}
+/* SELECT BUTTON!!! */ 
+#skinButton {
+flex: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 0;
+cursor: pointer; /* Cambia el cursor al pasar sobre el botón */ 
+margin: 0;
+overflow: hidden;
+background-color: #50C878; 
+border-radius: 5px;
+}
+#skinButton:hover {
+background-color: #006400; /* Cambia el color de fondo al pasar el cursor */
+box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Añade una sombra más pronunciada */
+}
+#texto3dImage {
+width: 100%;
+height: auto;
+max-width: 100%;
+margin-bottom: 10px; 
+}
+/* X CLOSE BUTTON!!! */ 
+#closeSkin {
+/*flex: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 0;
+margin: 0;
+overflow: hidden;
+background-color: #9C0000; 
+border-radius: 5px;
+*/
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: transparent; 
+  cursor: pointer; 
+  border-radius: 20px;
+
+
+}
+#closeSkin:hover {
+background-color: red; /* Cambia el color de fondo al pasar el cursor */
+box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Añade una sombra más pronunciada */
+}
+#closeSkin img {
+height: 20px;  /* Establece una altura fija */
+width: auto;   /* Ajusta el ancho automáticamente para mantener la proporción */
+max-width: 80%; /* Limita el ancho máximo al 80% del contenedor */
+object-fit: contain; /* Asegura que la imagen se ajuste correctamente */
+}
+/* CREATE BUTTON!!! */ 
+#paintSkin {
+flex: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 0;
+margin: 0;
+cursor: pointer; /* Cambia el cursor al pasar sobre el botón */   
+overflow: hidden;
+background-color: #2196F3; 
+border-radius: 5px;
+}
+#paintSkin:hover {
+background-color: blue; /* Cambia el color de fondo al pasar el cursor */
+box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Añade una sombra más pronunciada */
+}
+#skinButton img, #paintSkin img {
+height: 32px;  /* Establece una altura fija */
+width: auto;   /* Ajusta el ancho automáticamente para mantener la proporción */
+}
+
+
+
+/* ///////////// GAME CANVAS JUEGO ADENTRO  ////////////////// */
+/* ///////////// GAME CANVAS JUEGO ADENTRO  ////////////////// */
+/* ///////////// GAME CANVAS JUEGO ADENTRO  ////////////////// */
+#gameCanvas {
+top: 0;
+left: 0;
+width: 0;
+position: absolute;
+display: none; }
+#firstP {
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+background-color: #0B1E00;
+position: absolute;
+z-index: 1;
+display: none; }
+#hexagonGroup {
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;	
+position: absolute;
+z-index: 1;
+display: none; }
+#fixedText {
+position: fixed;
+top: 5vh;
+right: 5vw;
+z-index: 999;
+background-color: blue;
+color: white;
+padding: 10px;
+border-radius: 5px;
+font-size: 2vw;
+max-width: 90%; }
+
+/* ///////////// CHECKBOX - CAMERA  ////////////////// */
+.checkbox-container {
+display: flex;
+align-items: center;
+color: lightgreen;
+}
+.checkbox {
+accent-color: lightgreen;
+}
+
+/* ///////////// LOGOTIPO ////////////////// */
+/* ///////////// LOGOTIPO ////////////////// */	
+/* ///////////// LOGOTIPO ////////////////// */	
+#topImage {
+height: auto;
+max-width: 320px;
+z-index: -1; /* Para que esté detrás de otros elementos */
+}   
+
+/* ///////////// TEXT FIELD NICKNAME  ////////////////// */
+/* ///////////// TEXT FIELD NICKNAME  ////////////////// */
+/* ///////////// TEXT FIELD NICKNAME  ////////////////// */
+#playerName {
+box-sizing: border-box;
+border: 1px solid #ccc;
+padding: 10px;
+font-size: 18px;
+height: 40px;
+text-align: center; 
+border-radius: 5px; 
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+}
+#playerName::placeholder {
+text-align: center; 
+color: #aaa;
+}
+#playerName:focus::placeholder {
+color: #333;
+}
+
+/* ///////////// CAMERA OPTIONS AND RADIO BUTTONS  ////////////////// */
+/* ///////////// CAMERA OPTIONS AND RADIO BUTTONS  ////////////////// */	
+/* ///////////// CAMERA OPTIONS AND RADIO BUTTONS  ////////////////// */	
+#cameraOptions {
+display: none;
+/* display: flex; */
+justify-content: center;
+z-index: -1;
+font-weight: bold;
+color: white;
+}
+#cameraOptions span {
+color: white;
+font-weight: bold;	
+}
+.radio-button {
+display: flex;
+align-items: center; 
+position: relative;
+margin: 0 10px;
+}
+.radio-button input {
+display: none;
+}
+.radio-custom {
+width: 20px;
+height: 20px;
+border-radius: 50%;
+border: 2px solid #ccc;
+background-color: yellow; 
+position: relative;
+}
+.radio-custom::after {
+content: "";
+display: block;
+width: 10px;
+height: 10px;
+background-color: #666;
+border-radius: 50%;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+opacity: 0;
+}
+.radio-label {
+margin-left: 5px; /* Espacio entre el botón y la etiqueta */
+font-size: 20px; /* Tamaño del texto */
+color: #333;
+}
+.radio-button input:checked + .radio-custom::after {
+opacity: 1;
+}
+
+/* ///////////// GAME OVER BOX ////////////////// */
+/* ///////////// GAME OVER BOX ////////////////// */	
+/* ///////////// GAME OVER BOX ////////////////// */
+#contentR {
+text-align: center;
+color: white;
+font-family: Arial, sans-serif;
+}
+#retryBox {
+display: flex;
+visibility: hidden;
+position: absolute;
+width: 100%;
+height: 100%;
+background-color: black;
+/*display: flex;*/
+justify-content: center; /* Centra horizontalmente */
+align-items: center; /* Centra verticalmente */
+z-index: 999;	
+}
+#retryButton {
+padding: 10px 20px; 
+font-size: 16px;
+background-color: #04135a; 
+color: white;
+border: none; 
+border-radius: 5px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+cursor: pointer;
+transition: background-color 0.3s, box-shadow 0.3s;
+}
+#retryButton:hover {
+background-color: #2f2c79;
+box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); 
+}	
+
+/* ///////////// CENTER ALL ELEMENTS ////////////////// */	
+/* ///////////// CENTER ALL ELEMENTS ////////////////// */	
+/* ///////////// CENTER ALL ELEMENTS ////////////////// */		
+.center-box {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+height: 100%;
+background-color: black;
+}
+.center-box > form > * {
+margin: 10px 0;
+}	
+.container {
+position: relative; /* Establece posición relativa */
+}
+form {
+text-align: center; }
+#svg-container {
+width: 100vw;
+height: 100vh;
+overflow: auto;
+touch-action: pinch-zoom; }
+
+/* ///////////// CANVAS PAINT BOX ////////////////// */
+/* ///////////// CANVAS PAINT BOX ////////////////// */	
+/* ///////////// CANVAS PAINT BOX ////////////////// */	
+#paintBox h3 {
+margin-top: 0;
+margin-bottom: 20px;
+text-shadow: 2px 2px 4px rgba(255, 165, 0, 0.8); /* Sombra naranja */
+color: #ffffff; /* Color del texto blanco */
+}
+
+#paintBox {
+text-align: center;
+display: none; /* Cambiar a 'block' cuando sea necesario mostrar */
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: #222; /* Fondo oscuro para combinar con el tema del juego */
+border-radius: 20px;
+box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Sombra más intensa */
+overflow: hidden;
+width: 300px; 
+z-index: 999;
+padding: 20px; 
+}
+
+#paintBox::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(45deg, #000000, #00008B); /* Degradado de naranja a amarillo */
+opacity: 0.8;
+z-index: -1;
+}
+
+#canvasContainer {
+position: relative;
+width: 300px;
+height: 300px;
+margin: auto;
+border: 2px solid #ff8008; /* Borde naranja para combinar con el tema */
+border-radius: 50%;
+overflow: hidden;
+}
+
+#svgCanvas {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+
+#undoButton, #redoButton, #fillButton, #clearButton, .shapeButton {
+padding: 5px 10px;
+font-size: 14px; /* Aumenta el tamaño de fuente para mejor visibilidad */
+background-color: #ff8008; /* Color de fondo naranja */
+color: #000; /* Color del texto negro */
+border: none;
+border-radius: 5px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+cursor: pointer;
+transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#undoButton:hover, #redoButton:hover, #fillButton:hover, #clearButton:hover, .shapeButton:hover {
+background-color: #ffc837; /* Cambio de color al pasar el mouse */
+box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+#colorPicker, #brushSize {
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+#colorPicker {
+width: 60px; /* Ajusta el ancho del selector de color */
+height: 30px; /* Ajusta la altura del selector de color */
+border: 1px solid #ff8008; /* Borde naranja */
+border-radius: 5px;
+}
+
+#brushSize {
+width: 100%;
+}
+
+#paintBox button {
+/*margin: 5px;  Espaciado entre botones */
+}
+
+#createPaint {
+flex: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 0;
+margin: 0;
+cursor: pointer; /* Cambia el cursor al pasar sobre el botón */   
+overflow: hidden;
+background-color: #2196F3; 
+border-radius: 5px;
+}
+#createPaint:hover {
+background-color: blue; /* Cambia el color de fondo al pasar el cursor */
+box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Añade una sombra más pronunciada */
+}
+#createPaint img {
+height: 32px;  /* Establece una altura fija */
+width: auto;   /* Ajusta el ancho automáticamente para mantener la proporción */
+}
+
+#closePaint {
+position: absolute;
+top: 2px;
+right: 2px;
+background-color: transparent; 
+cursor: pointer; 
+border-radius: 20px;
+}
+#closePaint:hover {
+background-color: red; /* Cambia el color de fondo al pasar el cursor */
+box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Añade una sombra más pronunciada */
+}
+#closePaint img {
+height: 20px;  /* Establece una altura fija */
+width: auto;   /* Ajusta el ancho automáticamente para mantener la proporción */
+max-width: 80%; /* Limita el ancho máximo al 80% del contenedor */
+object-fit: contain; /* Asegura que la imagen se ajuste correctamente */
+}
+
+/* ///////////// PLAYER SPEED TEXT ANIMATION  ////////////////// */
+/* ///////////// PLAYER SPEED TEXT ANIMATION  ////////////////// */
+/* ///////////// PLAYER SPEED TEXT ANIMATION  ////////////////// */
+@keyframes fadeInOut {
+0% {
+opacity: 0;
+transform: scale(0.5); /* Empieza más pequeño */
+}
+50% {
+opacity: 1;
+}
+100% {
+opacity: 1;
+transform: scale(1); /* Termina a tamaño normal */
+}
+}
+
+/* ///////////// BLUE POINT  ////////////////// */
+/* ///////////// BLUE POINT  ////////////////// */
+/* ///////////// BLUE POINT  ////////////////// */	
+#bluePoint { display: none; }	
+
+
+/* ///////////// BODY AND TEXT h3, h2, p, NO-SELECT TEXT  ////////////////// */
+/* ///////////// BODY AND TEXT h3, h2, p, NO-SELECT TEXT  ////////////////// */
+/* ///////////// BODY AND TEXT h3, h2, p, NO-SELECT TEXT  ////////////////// */
+/* ///////////// BODY AND TEXT h3, h2, p, NO-SELECT TEXT  ////////////////// */
+/* ///////////// BODY AND TEXT h3, h2, p, NO-SELECT TEXT  ////////////////// */
+/* ///////////// BODY AND TEXT h3, h2, p, NO-SELECT TEXT  ////////////////// */
+/* ///////////// BODY AND TEXT h3, h2, p, NO-SELECT TEXT  ////////////////// */
+body {
+margin: 0;
+display: flex;
+overflow: hidden;	
+justify-content: center; /* Centra horizontalmente */
+align-items: center; /* Centra verticalmente */
+height: 100vh;	
+background-color: #000000; 
+position: relative; /* Establece el contexto de posición para los elementos secundarios */
+}
+h2 {
+font-size: 2em; /* Tamaño de fuente grande */
+font-weight: bold; /* Texto en negrita */
+color: #ff5733; /* Color naranja */
+text-shadow: 2px 2px 6px rgba(0, 0, 255, 0.5); /* Sombra de texto azul */
+}
+h3 {
+font-size: 2em; /* Tamaño de fuente grande */
+font-weight: bold; /* Texto en negrita */
+color: #ff5733; /* Color naranja */
+text-shadow: #00008b   ; /* Sombra de texto azul */
+}
+retryBox p {
+font-size: 1.5em; /* Tamaño de fuente grande */
+font-style: italic; /* Texto en cursiva */
+color: #ffffff; /* Color blanco */
+text-shadow: 1px 1px 4px rgba(0, 0, 255, 0.7); /* Sombra de texto azul */
+}
+.no-select {
+-webkit-touch-callout: none; /* iOS Safari */
+-webkit-user-select: none; /* Safari */
+-khtml-user-select: none; /* Konqueror HTML */
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* Internet Explorer/Edge */
+user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
