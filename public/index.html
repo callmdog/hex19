@@ -1,11 +1,1106 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Hola Mundo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<title>Not-Hex-A</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+<!-- ESTILOS CSS ARCHIVO !!!!!!!!! -->	
+<link rel="stylesheet" href="styles.css">
+<style>
+
+</style>
+
+<script src="/socket.io/socket.io.js"></script>
+<script> const socket = io(); </script>	
+<script src="greenCircles.js" defer></script>
+	
 </head>
-<body>
-    <h1>Hola Mundo</h1>
+
+<!-- BODY HTML !!!!!!!!! -->	
+<!-- BODY HTML !!!!!!!!! -->	
+<!-- BODY HTML !!!!!!!!! -->	
+	
+<body class="no-select">
+
+<!-- GAME OVER RETRY BOX !!!!!!!!! -->	
+<!-- GAME OVER RETRY BOX !!!!!!!!! -->		
+<!-- GAME OVER RETRY BOX !!!!!!!!! -->			
+<div id="retryBox">
+<div id="contentR">	
+<div id="logoImg">	
+<img id="topImage" src="images/hexlogo2.png" alt="Hex3" class="no-select">
+</div>	
+<h2>Game Over</h2>
+<p id="points">Points: 1018</p>
+<button id="retryButton">
+<img src="images/retry.png" alt="RETRY" width="140" height="40">
+</button>
+</div> 
+</div>
+<!-- END GAME OVER RETRY BOX !!!!!!!!! -->			
+	
+
+<div class="container">
+
+<!-- PAINT CANVAS BOX !!!!!!!!! -->
+<!-- PAINT CANVAS BOX !!!!!!!!! -->		
+<!-- PAINT CANVAS BOX !!!!!!!!! -->			
+<div id="paintBox">        
+<img src="images/createyourskin.png" alt="CREATE YOUR SKIN" id="texto3dImage"> 
+
+<button id="closePaint">
+<img src="images/x.png" alt="CLOSE">
+</button>	
+		
+<div id="canvasContainer">
+<svg id="svgCanvas" width="100%" height="100%">
+<circle cx="50%" cy="50%" r="50%" fill="white"/>
+</svg>
+</div>
+<input type="color" id="colorPicker" value="#000000">
+<input type="range" id="brushSize" min="1" max="20" value="2">
+<button id="undoButton"><i class="fas fa-undo"></i></button>
+<button id="redoButton"><i class="fas fa-redo"></i></button>
+<button id="fillButton"><i class="fas fa-fill"></i></button>
+<button id="clearButton"><i class="fas fa-trash"></i></button>
+<button class="shapeButton" data-shape="line"><i class="fas fa-slash"></i></button>
+<button class="shapeButton" data-shape="circle"><i class="fas fa-circle"></i></button>
+<button class="shapeButton" data-shape="rectangle"><i class="fas fa-square"></i></button>
+<button class="shapeButton" data-shape="triangle"><i class="fas fa-caret-up"></i></button>        
+
+<button id="createPaint"><i class="fas fa-paint-brush"></i> 
+<img src="images/create.png" alt="CREATE">
+</button>
+	
+</div>
+<!-- END PAINT CANVAS BOX !!!!!!!!! -->			
+
+<!-- SKIN BOX !!!!!!!!! -->
+<!-- SKIN BOX !!!!!!!!! -->		
+<!-- SKIN BOX !!!!!!!!! -->
+<div id="selectSkin">	
+ <img src="images/selectyourskin.png" alt="SELECT YOUR SKIN" id="texto3dImage"> 
+
+<button id="closeSkin">
+<img src="images/x.png" alt="CLOSE">
+</button>	
+	
+<div id="skinButtons2">
+<button id="paintSkin">
+<img src="images/createskin.png" alt="CREATE SKIN">
+</button>
+</div>	
+<div id="selectedSkin">	
+<div class="skin"></div>
+<div class="skin"></div>
+<div class="skin"></div>
+<div class="skin"></div>
+<div class="skin"></div>
+<div class="skin"></div>
+<div class="skin"></div>
+<div class="skin"></div>
+<div class="skin"></div>
+<div class="skin"></div>
+<div class="skin"></div>
+<div class="skin"></div>
+<div class="skin"></div>
+<div class="skin"></div>
+<div class="skin"></div>
+</div>	
+<div id="skinButtons">
+<button id="skinButton">
+<img src="images/select.png" alt="SELECT">
+</button>
+<!--<button id="closeSkin">
+<img src="images/back.png" alt="BACK">
+</button> -->
+</div>
+</div>
+<!-- END SKIN BOX !!!!!!!!! -->
+
+<!-- HS BOX !!!!!!!!! -->
+<!-- Hs BOX !!!!!!!!! -->		
+<!-- Hs BOX !!!!!!!!! -->
+<div id="highscoreDiv">	
+<img src="images/highscore.png" alt="HIGHSCORE" id="texto3dImage">
+<button id="closeHighscore">
+<img src="images/x.png" alt="CLOSE">
+</button>
+<div id="scorelistS">	
+
+<div id="scorelist">	
+</div>		
+	
+</div>		
+
+</div>
+<!-- END Hs BOX !!!!!!!!! -->
+
+<!-- HOME NAME FORM !!!!!!!!! -->
+<!-- HOME NAME FORM !!!!!!!!! -->	
+<!-- HOME NAME FORM !!!!!!!!! -->		
+<div class="center-box">	
+<form id="nameForm">
+<div id="logoImg">	
+<img id="topImage" src="hexicon2.gif" alt="Hex3" class="no-select">
+</div>	
+
+<!-- INSTRUCTIONS OF GAME !!!!!!!!! -->	
+<!-- INSTRUCTIONS OF GAME !!!!!!!!! -->
+<div id="greenCirlceI">
+  <div>
+    <svg id="greenCircle" width="0" height="22" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; ">
+      <circle cx="11" cy="11" r="10" fill=" " opacity="0.8" />
+    </svg>
+    <p id="text"> </p>
+  </div>
+</div>
+
+		
+<!-- HOME NAME FORM !!!!!!!!! -->
+<!-- HOME NAME FORM !!!!!!!!! -->	
+<!-- HOME NAME FORM !!!!!!!!! -->	
+<!--<label for="playerName">Introduce tu nombre:</label> -->
+<input type="text" id="playerName" name="playerName" required placeholder="Player name" minlength="1" maxlength="20" pattern=".{1,20}">	
+
+<div id="errorMessage" style="display: none; color: red;">The player's name must be between 1 and 20 characters.</div>	
+	
+<!-- CAMERA RADIO BUTTONS !!!!!!!!! -->		
+<div id="cameraOptions">
+<label class="radio-button">
+<input type="radio" name="camera" value="1" checked>
+<span class="radio-custom"></span>
+<span class="radio-label">Cam 1</span>
+</label>
+<label class="radio-button">
+<input type="radio" name="camera" value="2">
+<span class="radio-custom"></span>
+<span class="radio-label">Cam 2</span>
+</label>
+</div>
+<!-- END CAMERA RADIO BUTTONS !!!!!!!!! -->		
+
+
+<!-- HOME BUTTON - PLAY, SKIN, HIGHSCORE BUTTONS !!!!!!!!! -->			
+<div id="homeScreenButtons">
+	
+<button type="button" id="submitButton">
+<img src="images/play.png" alt="PLAY" >
+</button>
+
+<button type="button" id="customPlayer">
+<img src="images/skin.png" alt="SKIN" >
+</button>
+
+<button type="button" id="highscoreButton">
+<img src="images/highscore.png" alt="HIGHSCORE" >
+</button>
+
+</div>	
+<!-- END HOME BUTTON - PLAY, SKIN, HIGHSCORE BUTTONS !!!!!!!!! -->			
+
+</form>
+</div>
+<!-- END HOME NAME FORM !!!!!!!!! -->		
+	
+<!-- CONTAINER END !!!!!!!!! -->
+</div>
+
+<!-- SVG GAME ELEMENT (CAMERA, PLAYER, etc !!!!!!!!! -->
+<!-- SVG GAME ELEMENT (CAMERA, PLAYER, etc !!!!!!!!! -->
+<!-- SVG GAME ELEMENT (CAMERA, PLAYER, etc !!!!!!!!! -->
+<canvas id="gameCanvas" height="0" style="background-color: #ff0000;"> </canvas>
+<svg id="firstP" xmlns="http://www.w3.org/2000/svg">  
+<g id="camera"> <g id="hexagonGroup"> </g>  </g>
+<g id="playerGroup"> </g>			
+
+<!-- TEXT BOXES, #TOP PLAYERS, POINTS, SPEED 5s -->	
+<text id="textLine1" x="20" y="40" fill="red"></text>
+<text id="textLine2" x="20" y="60" fill="blue"></text>
+<text id="textLine3" x="20" y="80" fill="green"></text>
+<text id="textLine4" x="20" y="100" fill="orange"></text>
+<text id="textLine5" x="20" y="120" fill="purple"></text>
+<text id="textLine6" x="95%" y="40" fill="red" text-anchor="end" font-weight="bold" >Points: 1018</text>
+<text id="textLine7" x="95%" y="60" fill="blue" text-anchor="end" font-weight="bold" > </text>
+<text id="textLine8" x="50%" y="50%" fill="blue" text-anchor="middle" font-size="54" font-weight="bold"> </text>
+
+<!-- CHECK-BOX for CAMERA - Centered Camera -->		
+<foreignObject id="checkboxContainer" x="20" y="20" width="200" height="30">
+<div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: center;" class="checkbox-container" onclick="event.stopPropagation();">
+<input type="checkbox" id="centeredCameraCheckbox" checked style="accent-color: lightgreen;">
+<label for="centeredCameraCheckbox" style="color: lightgreen; margin-left: 5px;">Centered Camera</label>
+</div>
+</foreignObject>
+
+</svg>	
+<!-- END FirstP SVG GAME ELEMENT (CAMERA, PLAYER, etc !!!!!!!!! -->
+
+
+<!-- INSTRUCTIONS SCRIPT!!!!!!! -->	
+<!-- INSTRUCTIONS SCRIPT!!!!!!! -->	
+<!-- INSTRUCTIONS SCRIPT!!!!!!! -->		
+<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+<script>
+anime({ targets: '#greenCircle circle', r: 6, duration: 1000, easing: 'easeInOutSine', direction: 'alternate', loop: true });
+</script>	
+
+<script>
+const texts = [
+{ message: "Collect green circles to grow your player", color: "#008001" },
+{ message: "Boost your speed by collecting blue circles", color: "blue" },
+{ message: "Compete with players worldwide", color: "" },
+{ message: "Battle to stay at the top of the high score!", color: "" }
+];
+
+const circleParent = document.getElementById("greenCircle");
+let currentIndex = 0;
+const textElement = document.getElementById("text");
+const circleElement = document.querySelector("#greenCircle circle");
+function changeContent() {
+textElement.classList.add("hidden");
+setTimeout(() => {
+currentIndex = (currentIndex + 1) % texts.length;
+textElement.textContent = texts[currentIndex].message;
+const existingCircle = circleParent.querySelector("circle");
+if (existingCircle) {
+circleParent.removeChild(existingCircle);
+}
+
+// If there's a color specified, create a new circle
+if (texts[currentIndex].color !== "") {
+const newCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+newCircle.setAttribute("cx", "50");
+newCircle.setAttribute("cy", "50");
+newCircle.setAttribute("r", "40");
+newCircle.setAttribute("fill", texts[currentIndex].color);
+circleParent.appendChild(newCircle);
+}
+textElement.classList.remove("hidden");
+}, 1000); // Wait for the opacity transition to complete (1 second)
+}
+setInterval(changeContent, 2000);
+</script>
+<!-- END INSTRUCTIONS SCRIPT!!!!!!! -->	
+
+
+<!-- CheckBOX Centered CAMERA SRIPT LOGIC -->	
+<!-- CheckBOX Centered CAMERA SRIPT LOGIC -->	
+<!-- CheckBOX Centered CAMERA SRIPT LOGIC -->		
+<script>
+function positionCheckbox() {
+const svgHeight2 = document.documentElement.clientHeight;
+const svg = document.getElementById('firstP');
+const bbox = svg.getBBox();
+const checkboxContainer = document.getElementById('checkboxContainer');
+const offsetY = 40; // Altura del checkbox
+checkboxContainer.setAttribute('x', 20);
+checkboxContainer.setAttribute('y', svgHeight2 - offsetY);
+}
+window.addEventListener('resize', positionCheckbox);
+window.addEventListener('load', positionCheckbox);
+</script>
+<!-- END CheckBOX Centered CAMERA SRIPT LOGIC -->	
+
+<circle id="bluePoint" cx="170" cy="170" r="8" fill="blue" />
+
+<script src="vertexFunciones.js"></script>
+
+<script src="playerSkin.js"></script>
+
+<!-- COMIENZA JUEGO LOGICA !!!!!!!!! -->
+<!-- COMIENZA JUEGO LOGICA !!!!!!!!! -->
+<!-- COMIENZA JUEGO LOGICA !!!!!!!!! -->	
+<script>  
+
+
+//LOGICA DEL JUEGO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//LOGICA DEL JUEGO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//LOGICA DEL JUEGO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//LOGICA DEL JUEGO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//LOGICA DEL JUEGO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	
+document.addEventListener('DOMContentLoaded', function () {	
+	
+positionCheckbox();	
+const nameForm = document.getElementById('nameForm');
+const gameCanvas = document.getElementById('gameCanvas');
+const canvas = document.getElementById('gameCanvas');
+const modal = document.getElementById('gameOverModal');
+const context = canvas.getContext('2d');
+let NameSecure = '';
+
+///CAM OPTIONS & CAM CHECKBOX
+let Camara = 1;
+document.getElementById('cameraOptions').addEventListener('change', function(event) {
+const selectedValue = event.target.value;
+if (selectedValue === '1') { Camara = 1;
+} else if (selectedValue === '2') { Camara = 2; }
+console.log('Camara:', Camara);
+});	
+
+//CHECKBOX ABAJO IZQUIERDA	
+document.getElementById('centeredCameraCheckbox').addEventListener('change', function(event) {
+if (event.target.checked) {
+Camara = 1;
+initialCameraX = svgWidth / 2 - bX;
+initialCameraY = svgHeight / 2 - bY;
+//CAMERA MOVEMENT
+camera.setAttribute('transform', `translate(${initialCameraX}, ${initialCameraY})`);
+} else {
+Camara = 2;
+}
+console.log('Camara:', Camara);
+});
+const checkbox = document.getElementById('centeredCameraCheckbox');
+checkbox.addEventListener('change', function(event) {
+event.stopPropagation();  // Detiene la propagación del evento
+Camara = event.target.checked ? 1 : 2;
+console.log('Camara:', Camara);
+});
+// También agregar un manejador de clic para evitar la propagación
+checkbox.addEventListener('click', function(event) {
+event.stopPropagation();  // Detiene la propagación del evento
+});
+const checkboxContainers = document.querySelectorAll('.checkbox-container');
+checkboxContainers.forEach(container => {
+container.addEventListener('click', function(event) {
+event.stopPropagation();
+});
+});	
+	
+// DESPUES DE INTRODUCIR EL NOMBRE !!!!!!!!!!!!!!!!!!!!!!!!!
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//////////
+document.getElementById('submitButton').addEventListener('click', function () {
+var playerNameInput = document.getElementById("playerName");
+var errorMessage = document.getElementById("errorMessage");
+if (playerNameInput.checkValidity()) {
+// El formulario es válido, iniciar el juego
+socket.on('connect_error', (error) => {
+console.error('Error de conexión:', error); });
+const playerName = document.getElementById('playerName').value;
+console.log(`CLIENT EJEC. Name: ${playerName}`);
+NameSecure = playerName;
+//Ocultar el formulario y mostrar el canvas
+nameForm.style.display = 'none';
+gameCanvas.style.display = 'block';
+hexagonGroup.style.display = 'block';
+firstP.style.display = 'block';
+// ACTIVAR EL SERVIDOR
+socket.emit('playerNameEntered', playerName, skinCode);
+} else {
+// Mostrar mensaje de error
+errorMessage.style.display = "block";
+}		
+});
+
+//HOME BUTTONS LOGIC!!!!!!!!!!!!!!!!!!!!!!!////// ///////// ///////// ////////// /////////
+//HOME BUTTONS LOGIC!!!!!!!!!!!!!!!!!!!!!!!
+//HOME BUTTONS LOGIC!!!!!!!!!!!!!!!!!!!!!!!////// ////////// ///////// ////////// ////////
+
+//HOME CUSTOM PLAYER BUTTON
+document.getElementById('customPlayer').addEventListener('click', function () {
+document.getElementById('paintBox').style.display = 'block';
+});
+
+//OPEN CANVAS CIRCLE SKIN DRAW BUTTON	
+document.getElementById('paintSkin').addEventListener('click', function () {
+selectSkin.style.display = 'none';
+document.getElementById('paintBox').style.display = 'block';
+});
+
+//HOME HIGHScore BUTTON	
+document.getElementById('highscoreButton').addEventListener('click', function () {
+console.log('ENVIAR LISTA!');
+socket.emit('enviarLista');
+document.getElementById('highscoreDiv').style.display = 'block'; 
+});
+
+//CLOSE PAINT BUTTON	
+document.getElementById('closePaint').addEventListener('click', function () {
+selectSkin.style.display = 'none';
+document.getElementById('paintBox').style.display = 'none';
+});	
+
+//HIGHScore Close BUTTON	
+document.getElementById('closeHighscore').addEventListener('click', function () {
+document.getElementById('highscoreDiv').style.display = 'none';
+});
+
+//CALL HighScore Text from SERVER!!!!!!	
+//CALL HighScore Text from SERVER!!!!!!	
+//CALL HighScore Text from SERVER!!!!!!	
+socket.on('obtenerLista', function (jsonData) {
+let hscore = jsonData;
+console.log('Lista HS:', hscore);
+hscore.sort((a, b) => b.score - a.score);
+let topScores = hscore.slice(0, 20);
+// Get the scorelist div
+let scorelistDiv = document.getElementById('scorelist');
+// Generate the list items
+topScores.forEach((player, index) => {
+let listItem = document.createElement('div');
+listItem.className = 'score-item';
+listItem.style.color = player.color;
+listItem.textContent = `#${index + 1} ${player.name}: ${player.score}`;
+scorelistDiv.appendChild(listItem);
+});
+});        
+
+function preventZoom(event) {
+event.preventDefault();
+}	
+	
+createHexagons(socket, function() {
+	console.log("createHexagons end");
+	socket.emit('dibujarVerdes', 'numero');
+});	
+	
+//VARIABLES/////////////////////////////////////////////
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!/////	
+let randomX = 0;	
+let randomY = 0;	
+let inicialX = 0;
+let inicialY = 0;
+let connectedUsers = 0;
+let isMoving = false
+const players = {}; // Objeto para almacenar la información de los jugadores
+const hexagonGroup = document.getElementById('hexagonGroup');
+const firstP = document.getElementById('firstP');
+const bluePoint = {id: socket.id, name: '', x: 170,  y: 170,  color: 'blue', };
+let topplayers = [];
+const svgWidth = document.documentElement.clientWidth;
+const svgHeight = document.documentElement.clientHeight;
+let initialCameraX = svgWidth / 2 ;
+let initialCameraY = svgHeight / 2 ;
+let currentCameraX3 = 0;
+let currentCameraY3 = 0;
+let currentCamera10 = 0;
+let currentCameraY10 = 0;
+const camera = document.getElementById('camera');
+let bX = 0;
+let bY = 0;	
+let currentCameraX4 = 0;	
+let currentCameraY4 = 0;	
+let textLine1 = document.getElementById('textLine1');
+let textLine2 = document.getElementById('textLine2');
+let textLine3 = document.getElementById('textLine3');
+let textLine4 = document.getElementById('textLine4');
+let textLine5 = document.getElementById('textLine5');
+let textLine6 = document.getElementById('textLine6');
+let textLine7 = document.getElementById('textLine7');
+let textLine8 = document.getElementById('textLine8');
+let CalculoCam = 0;	
+	
+textLine1.classList.add('no-select');
+textLine2.classList.add('no-select');
+textLine3.classList.add('no-select');
+textLine4.classList.add('no-select');
+textLine5.classList.add('no-select');
+textLine6.classList.add('no-select');
+textLine7.classList.add('no-select');
+textLine8.classList.add('no-select');
+		
+function addPlayer(nombre, puntos, color) {
+	const nuevoJugador = { nombre: nombre, puntos: puntos, color: color };
+	topplayers.push(nuevoJugador);
+}
+
+/////////////////////////////////////////////////////////////////////
+//CLICK LISTENER HEAGONGROUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+firstP.addEventListener('click', function (event) {
+//console.log('HEXAGON GROUP LOG');
+const mouseX = event.clientX - firstP.getBoundingClientRect().left;
+const mouseY = event.clientY - firstP.getBoundingClientRect().top;
+moveBluePoint(mouseX, mouseY);
+});
+
+//CONNECTED USERS////////////////////////////////
+///////////////////////////////////////////////// 
+//SOCKET.ON SIGNIFICA QUE ESTA ESCUCHANDO AL SERVIDOR. Son datos que vienen del servidor.
+socket.on('userCount', function (count) {
+	connectedUsers = count;
+});	
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//////////////////////////////////////////////////////////////////////	
+//IN ORDER FUNCIONTS OF GAME
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//IN ORDER FUNCIONTS OF GAME
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+//5. ASIGN COLOR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//////////////////////////////////////////////////////////////////////
+socket.on('assignColor', function (playerName) {
+	console.log('SOCKET ASSIGN COLOR');
+	socket.emit('updatePlayersRequest');
+});	
+	
+//6. UPDATE TOP PLAYERS 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//UPDATE POINTS, NAME, TOP PLAYERS of Players	
+//////////////////////////////////////////////////////////////////////	
+let camProb = false;
+socket.on('updatePlayers2', function (updatedPlayers2) {
+console.log('SOCKET UPDATE PLAYERS 2');
+topplayers = [];
+//Iterar sobre el objeto de jugadores y actualizar la información
+for (const playerId in updatedPlayers2) {
+const player = updatedPlayers2[playerId];
+//console.log(`PLAYER2: ${playerId}, ${player.x}, ${player.y}, ${player.nombre},${player.color},${player.puntos}`);
+addPlayer(player.nombre, player.puntos, player.color);
+
+//INDIVIDUAL CAM MOVEMENT	
+if(NameSecure === player.nombre){
+textLine6.textContent = `Points: ${player.puntos}`;
+textLine6.style.fill = player.color;
+initialCameraX = svgWidth / 2 - player.x;
+initialCameraY = svgHeight / 2 - player.y  ;
+bX = player.x;
+bY = player.y;
+
+//CAMERA MOVEMENT
+if (camProb === false) {
+camera.setAttribute('transform', `translate(${initialCameraX}, ${initialCameraY})`);
+}
+if (Camara===2){
+camProb = true;
+}
+// END CAMERA MOVEMENT
+
+inicialX = player.x;
+inicialY = player.y;
+findAndMarkClosestVertices(inicialX, inicialY,currentCameraX3,currentCameraY3);
+}
+	
+}
+
+//UPDATE TOP PLAYERS NAME, COLOR	
+const topPlayers = getTopPlayers();
+textLine1.textContent = topPlayers.length >= 1 ? `#1 ${topPlayers[0].nombre}: ${topPlayers[0].puntos}` : '';
+if (topPlayers[0] && topPlayers[0].color) { textLine1.style.fill = topPlayers[0].color; } else {}	
+textLine2.textContent = topPlayers.length >= 2 ? `#2 ${topPlayers[1].nombre}: ${topPlayers[1].puntos}` : '';
+if (topPlayers[1] && topPlayers[1].color) {textLine2.style.fill = topPlayers[1].color; } else {}
+textLine3.textContent = topPlayers.length >= 3 ? `#3 ${topPlayers[2].nombre}: ${topPlayers[2].puntos}` : '';
+if (topPlayers[2] && topPlayers[2].color) {textLine3.style.fill = topPlayers[2].color; } else {}
+textLine4.textContent = topPlayers.length >= 4 ? `#4 ${topPlayers[3].nombre}: ${topPlayers[3].puntos}` : '';
+if (topPlayers[3] && topPlayers[3].color) {textLine4.style.fill = topPlayers[3].color; } else {}
+textLine5.textContent = topPlayers.length >= 5 ? `#5 ${topPlayers[4].nombre}: ${topPlayers[4].puntos}` : '';
+if (topPlayers[4] && topPlayers[4].color) {textLine5.style.fill = topPlayers[4].color; } else {}
+
+});	
+
+//7. GET TOP PLAYERS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//////////////////////////////////////////////////////////////////////	
+function getTopPlayers() {
+const sortedPlayers = topplayers.sort((a, b) => b.puntos - a.puntos);
+const topPlayersx = sortedPlayers.slice(0, 5);
+topPlayersx.forEach(topplayer => { });
+return topPlayersx;
+}	
+
+//9. UPDATE PLAYERS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//UPDATE POSITION, SIZE of Players	
+//////////////////////////////////////////////////////////////////////
+socket.on('updatePlayers', function (updatedPlayers) {
+console.log('SOCKET UPDATE PLAYERS');	
+	
+//Iterar sobre el objeto de jugadores y actualizar la información
+for (const playerId in updatedPlayers) {
+const player = updatedPlayers[playerId];
+const ptsf = parseFloat(player.puntos); 
+const sizeCalc = (0.4 * ptsf) + 20;		
+
+//EXISTING PLAYER ELEMENT//////////////////////////////////// 	 
+const existingPlayerElement = document.getElementById(playerId);
+if (existingPlayerElement) {	
+const svgContainer = existingPlayerElement.querySelector('svg');
+if (svgContainer) {
+let skinCodeTemp = player.skinCode;
+skinCodeTemp = skinCodeTemp.replace('width="20"', `width="${sizeCalc}"`).replace('height="20"', `height="${sizeCalc}"`);
+svgContainer.innerHTML = skinCodeTemp;
+console.log("CODE SVG:", svgContainer);
+}
+//
+
+let velocidadD = player.velocidad;
+console.log("velocidadD:", velocidadD);
+	
+if (velocidadD===false){
+//existingPlayerElement.setAttribute('stroke', 'white'); 
+//existingPlayerElement.setAttribute('stroke-width', '1'); 
+//existingPlayerElement.setAttribute('stroke-opacity', '0.5'); 
+}
+if (velocidadD===true){
+//existingPlayerElement.setAttribute('stroke', 'blue'); 
+//existingPlayerElement.setAttribute('stroke-width', '3');
+////existingPlayerElement.setAttribute('stroke-opacity', '0.5'); 
+}
+
+
+//PLAYER ELEMENT//////////////////////////////////// 		
+} else {
+	
+const playerElement = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+const svgContainer = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+playerElement.setAttribute('id', playerId);
+if(playerId !== socket.id) { playerElement.setAttribute('data-player-id', 'jugador'); }	
+
+//SKIN CODE OF PLAYER ELEMENT	
+let skinCodeTemp = player.skinCode;
+skinCodeTemp = skinCodeTemp.replace('width="20"', `width="${sizeCalc}"`).replace('height="20"', `height="${sizeCalc}"`);
+svgContainer.innerHTML = skinCodeTemp;
+playerElement.appendChild(svgContainer);
+	
+//POSITION OF PLAYER ELEMENT
+const dimensions = getSvgDimensions(skinCodeTemp);
+console.log('Width:', dimensions.width, 'Height:', dimensions.height);
+const width = dimensions.width / 2 ;
+const height =  dimensions.height / 2 ;
+playerElement.setAttribute('transform', `translate(${player.x - (width)},${player.y  - (height)})`);
+
+//ADD PLAYERELEMENT TO HEXAGON MAP	
+hexagonGroup.appendChild(playerElement);
+
+console.log("CompJugador:", playerElement, playerId, player);
+
+}
+
+//TEXT ELEMENT//////////////////////////////////////////////////////////
+const existingTextElement = document.getElementById(playerId + '-name');
+if (existingTextElement) {
+existingTextElement.setAttribute('x', player.x);
+existingTextElement.setAttribute('y', player.y - 8);
+existingTextElement.textContent = player.nombre + ' ('+ player.puntos + ')';
+} else {
+const textElement2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+textElement2.setAttribute('id', playerId + '-name');
+textElement2.setAttribute('x', player.x);
+textElement2.setAttribute('y', player.y - 10);
+textElement2.setAttribute('text-anchor', 'middle');
+textElement2.setAttribute('fill', 'green');
+textElement2.setAttribute('font-size', '16px');
+textElement2.textContent = player.nombre + ' ('+ player.puntos + ')';
+textElement2.classList.add('no-select');
+hexagonGroup.appendChild(textElement2); }
+	
+}
+});
+
+function getSvgDimensions(skinCode) {
+    const widthMatch = skinCode.match(/width="(\d+\.?\d*)"/);
+    const heightMatch = skinCode.match(/height="(\d+\.?\d*)"/);
+    const width = widthMatch ? parseFloat(widthMatch[1]) : null;
+    const height = heightMatch ? parseFloat(heightMatch[1]) : null;
+    return { width, height };
+}	
+
+//WHEN MOVE FUNCTIONS```````````````````````````````````````````````````-------------------------------------------------
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-------------------------------------------------
+//WHEN MOVE FUNCTIONS```````````````````````````````````````````````````-------------------------------------------------
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-------------------------------------------------
+
+//1. MOVE BLUE POINT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//////////////////////////////////////////////////////////////////////////
+	
+function moveBluePoint( clickX, clickY ) {
+
+//CAMARA/////////////////////
+const transformAttribute = camera.getAttribute('transform');
+const match = transformAttribute.match(/translate\(([^,]+),([^,]+)\)/);
+if (match) {
+currentCameraX4 = parseFloat(match[1]);
+currentCameraY4 = parseFloat(match[2]);
+//console.log('Coordenadas cámara:', currentCameraX4, currentCameraY4);  
+} else { console.error('No cámara.'); }
+//CAMARA END/////////////////////
+	
+if (!isMoving) { 
+console.log('/////Move Player//////')
+isMoving = true;  
+const closestGreenVertex = findClosestGreenVertexToClick(clickX - currentCameraX4, clickY - currentCameraY4,currentCameraX3,currentCameraY3); 
+//console.log('Vértice cercano: ', closestGreenVertex.x, closestGreenVertex.y); 
+animateBluePoint(closestGreenVertex.x, closestGreenVertex.y);		
+}
+	
+}		
+
+//3. ANIMATE BLUE POINT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/////////////////////////////////////////////////////////////////////////////	
+function animateBluePoint(destinationX, destinationY) {
+//console.log('1. Animate Blue Point');
+const startX = bX;
+const startY = bY;
+const startTime = performance.now();
+const duration = 50; // 1 seg
+function update() {
+const currentTime = performance.now();
+const elapsed = currentTime - startTime;
+const progress = Math.min(elapsed / duration, 1);
+const newX = startX + progress * (destinationX - startX);
+const newY = startY + progress * (destinationY - startY);	
+bX = newX;
+bY = newY;	
+if (progress < 1) { requestAnimationFrame(update);
+} else {
+// Animación completada, emitir datos al servidor
+socket.emit('animationData', { start: { x: startX, y: startY }, end: { x: newX, y: newY } });
+// Supongamos que newPosition es un objeto con las nuevas coordenadas
+const newPosition = { x:  newX , y: newY, velocidad: Velocidad };
+socket.emit('updatePosition', newPosition);
+inicialX = newX; inicialY = newY;	
+}
+} requestAnimationFrame(update);
+}		
+
+//4. SOCKET ANIMATE BLUE POINT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//////////////////////////////////////////////////////////////////////
+//let CalculoCam = 0;
+let currentCameraX4p = 0;
+let currentCameraY4p = 0;
+
+socket.on('animateBluePoint', function (animationData) {
+const playerId = animationData.playerId;
+const data = animationData.data;
+const txt = animationData.playerName;
+const playerSpeed = animationData.playerSpeed;
+const playerElement = document.getElementById(playerId);
+console.log('playerElement: ', playerElement  );
+const textElement2 = document.getElementById(playerId + '-name');
+animateCircleLocally(playerElement, data.start, data.end, playerId, playerSpeed);
+animateNameLocally(textElement2, data.start, data.end);
+
+	
+//FINISCHED ANIMATE CIRCLE LOCALLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//FINISCHED ANIMATE CIRCLE LOCALLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	
+//FINISCHED ANIMATE CIRCLE LOCALLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!		
+animateCircleLocally(playerElement, data.start, data.end, playerId,playerSpeed, function() {
+
+
+//CAMARAS MOVIMIENTO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!////////////////
+//CAMARAS MOVIMIENTO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!////////////////
+
+if(Camara===2) {
+//CAMARA/////////////////////
+const transformAttribute = camera.getAttribute('transform');
+const match = transformAttribute.match(/translate\(([^,]+),([^,]+)\)/);
+if (match) {
+currentCameraX4p = parseFloat(match[1]);
+currentCameraY4p = parseFloat(match[2]);
+} else {
+console.error('No se pudieron obtener las coordenadas de la cámara.');
+}
+console.log('1. CAM Y: ', currentCameraY4p  );
+//CAMARA END/////////////////////        
+
+const currentX = bX; 
+const currentY = bY; 
+const bluePointRect = playerElement.getBoundingClientRect();
+const bluePointWidth = bluePointRect.width;
+const bluePointHeight = bluePointRect.height;
+
+console.log('bluePointWidth!!!!!!:',   bluePointWidth );
+	
+
+//DERECHA!!!!!
+const bluePointRightX = currentX + bluePointWidth;
+const limitRightX = - currentCameraX4p + (window.innerWidth * 0.7);
+if (bluePointRightX > limitRightX) {      
+//if(MoveCam){
+CalculoCam = CalculoCam + svgWidth / 3;
+console.log('CalculoCam!!!!!!:',   limitRightX );
+animateCam (10,  10  ,bX, bY, svgWidth,  function() {
+//MoveCam = true;
+});   
+//}
+}
+
+///IZQUIERDA!!!!!!!
+const bluePointRightX2 = currentX - bluePointWidth;
+const limitRightX2 = - currentCameraX4p + (window.innerWidth * 0.3);
+if (bluePointRightX2 < limitRightX2) {
+//if(MoveCam){
+CalculoCam = CalculoCam - svgWidth / 3;
+console.log('CalculoCam !!!!!!:',   limitRightX2 );
+animateCam2 (10,  10  ,bX, bY,svgWidth,  function() {
+//MoveCam = true;
+});   
+//}
+}
+
+//ARRIBA!!!!!!! por modificar
+console.log('2. bY: ',   bY ); 
+const bluePointRightXA = currentY - bluePointHeight;
+console.log('3. bluePointRightXA: ',  bluePointRightXA  );
+const limitRightY = - currentCameraY4p + (window.innerHeight * 0.7);
+if (bluePointRightXA > limitRightY) {      
+//if(MoveCam){
+CalculoCam = CalculoCam + svgHeight / 3;
+//console.log('5. CalculoCam: ',   CalculoCam  );
+animateCam3 (10,  10  , bX, bY, svgHeight,function() {
+//MoveCam = true;
+});   
+//}
+}
+console.log('Limite tot. ', svgWidth   ); 
+console.log('Limite der. ',  limitRightX  ); 
+console.log('Limite izq. ',  limitRightX2  );
+	
+//ABAJO!!!!!!!!
+const bluePointRightXA2 = currentY + bluePointHeight;
+const limitRightY2 = - currentCameraY4p + (window.innerHeight * 0.3);
+if (bluePointRightXA2 < limitRightY2) {      
+//if(MoveCam){
+//CalculoCam = CalculoCam + svgHeight / 3;
+//console.log('5. CalculoCam: ',   CalculoCam  );
+animateCam4 (10,  10  ,bX, bY, svgHeight, function() {
+//MoveCam = true;
+});   
+//}
+}
+
+}
+	
+// END 30% MENOS CAMARA IZQUIERDA!!!!!!!
+
+findAndMarkClosestVertices(inicialX, inicialY,currentCameraX3,currentCameraY3);
+isMoving = false;
+});
+});	
+
+////ATRAS///////////
+// ANIMATE CAM 2 CAMARA MOVIMIENTO !!!!!!!!!!!!
+////////////////////
+
+//5. ANIMATE CIRCLE LOCALLY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//////////////////////////////////////////////////////////////////////
+let speedPlayer = 500;			  
+function animateCircleLocally(circleElement, start, end, playerId, playerSpeed, callback) {
+let duration = 500;
+
+if(playerSpeed === false){ duration = 500; }
+if(playerSpeed === true){ duration = 50; }	
+	
+const startTime = performance.now();
+function update() {
+const currentTime = performance.now();
+const progress = Math.min((currentTime - startTime) / duration, 1);
+const newX = start.x + progress * (end.x - start.x);
+const newY = start.y + progress * (end.y - start.y);	
+
+const bbox = circleElement.getBBox();
+const width = bbox.width;
+const height = bbox.height;
+
+circleElement.setAttribute('transform', `translate(${newX-(width/2)},${newY-(height/2)})`);	
+	
+if (socket.id===playerId) {
+	
+////CAMERA MOVEMENT
+const newXCam = svgWidth / 2 - newX;
+const newYCam = svgHeight / 2 - newY;	
+if(Camara===1)
+{
+camera.setAttribute('transform', `translate(${newXCam}, ${newYCam})`);
+  
+}
+////END CAMERA MOVEMENT
+
+const radius = width / 2;
+	
+detectarColisiones(circleElement);
+detectarColisionesRectangulares(newX, newY, radius, greenCircles);
+}	
+
+if (progress < 1) { requestAnimationFrame(update); } 
+else {
+// La animación ha terminado
+if (typeof callback === 'function') { callback(); } 	
+}	
+} requestAnimationFrame(update);
+	
+}
+
+//6. ANIMATE TEXT NAME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//////////////////////////////////////////////////////////////////////
+function animateNameLocally(circleElement, start, end) {
+//console.log('ANIMATE TEXT LOCALLY');
+const duration = 100;
+const startTime = performance.now();
+function update() {
+const currentTime = performance.now();
+const progress = Math.min((currentTime - startTime) / duration, 1);
+const newX = start.x + progress * (end.x - start.x);
+const newY = start.y + progress * (end.y - start.y);
+	
+circleElement.setAttribute('x', newX);
+circleElement.setAttribute('y', newY - 8);
+
+if (progress < 1) {
+requestAnimationFrame(update); } }
+requestAnimationFrame(update);
+	
+}	
+
+//8. DETECTAR COLISION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//////////////////////////////////////////////////////////////////////	
+function detectarColisiones(playerElement) {		
+document.querySelectorAll('g[data-player-id]').forEach((otherCircle) => {
+const playerIdN = otherCircle.getAttribute('id');
+console.log(`IDn: (${playerIdN}), (${playerIdN})`);
+const playerBBox = playerElement.getBBox();
+const playerBBox2 = otherCircle.getBBox();
+    
+const playerSize = playerBBox.width;
+const playerSize2 = playerBBox2.width;	
+
+const blueRadius = parseFloat(playerSize/2); 
+const greenRadius = parseFloat(playerSize2/2);
+
+console.log(`1: (${playerSize}), (${blueRadius})`);
+console.log(`2: (${playerSize2}), (${greenRadius})`); 	
+
+const transform = playerElement.getAttribute('transform');
+// Extrae los valores de x e y utilizando una expresión regular
+const translateValues = transform.match(/translate\(([^,]+),\s*([^\)]+)\)/);
+  const x = parseFloat(translateValues[1]);
+  const y = parseFloat(translateValues[2]);	
+
+const transform2 = otherCircle.getAttribute('transform');
+// Extrae los valores de x e y utilizando una expresión regular
+const translateValues2 = transform2.match(/translate\(([^,]+),\s*([^\)]+)\)/);
+  const x2 = parseFloat(translateValues2[1]);
+  const y2 = parseFloat(translateValues2[2]);		
+
+	
+const blueX = parseFloat(x);
+const blueY = parseFloat(y);	
+const greenX = parseFloat(x2);
+const greenY = parseFloat(y2);
+
+	console.log(`1b: (${x}), (${y})`);
+console.log(`2b: (${x2}), (${y2})`); 	
+
+
+// Calcular las coordenadas de los cuadros delimitadores
+
+const blueBoundingBox = {
+x1: blueX - blueRadius, y1: blueY - blueRadius,
+x2: blueX + blueRadius, y2: blueY + blueRadius };
+
+const greenBoundingBox = {
+x1: greenX - greenRadius, y1: greenY - greenRadius,
+x2: greenX + greenRadius, y2: greenY + greenRadius};
+	
+// Verificar la colisión entre los cuadros delimitadores
+if (blueBoundingBox.x1 < greenBoundingBox.x2 &&
+blueBoundingBox.x2 > greenBoundingBox.x1 &&
+blueBoundingBox.y1 < greenBoundingBox.y2 &&
+blueBoundingBox.y2 > greenBoundingBox.y1 ) {
+
+if (blueRadius > greenRadius){ 
+console.log(`ID Jugador: (${socket.id}), (${blueRadius})`);
+console.log(`ID Enemigo: (${playerIdN}), (${greenRadius})`); 
+
+//console.log(`Radio Jugador:`, blueRadius); 
+//console.log(`Radio Enemigo:`, greenRadius); 
+	
+console.log(`HAS COMIDO AL OTRO JUGADOR`); 
+
+socket.emit('eliminarJugador', playerIdN);
+	
+}else if (blueRadius < greenRadius){
+console.log(`ID Jugador: (${socket.id}), (${blueRadius})`);
+console.log(`ID Enemigo: (${playerIdN}), (${greenRadius})`); 
+
+//console.log(`Radio Jugador:`, blueRadius); 
+//console.log(`Radio Enemigo:`, greenRadius); 
+
+socket.emit('eliminarJugador', socket.id);
+	
+console.log(`GAME OVER2!!`); 
+}
+}
+});	
+//console.log('La detección de colisiones ha terminado.');
+}	
+
+//ELIMINAR JUGADOR DE TODOS CLIENTES CUANDO COLISION !!!!!!!!!!!!!!!!!!
+////////////////////////////////////////////////////////////		
+socket.on('eliminarJugadorEnCliente', (playerIdN) => {
+
+var circulo = document.getElementById(playerIdN);
+var x = circulo.getAttribute('cx');
+var y = circulo.getAttribute('cy');	
+if (circulo) {
+circulo.parentNode.removeChild(circulo);
+
+} else {
+console.log("El círculo con el ID especificado no fue encontrado.");
+}
+
+var nombre = document.getElementById(playerIdN + '-name');
+var texto = nombre.textContent;
+	
+if (nombre) {
+nombre.parentNode.removeChild(nombre);
+console.log("ELIMINADO: ." + texto);
+
+playerText(x, y, texto);
+	
+} else {
+console.log("El nombre con el ID especificado no fue encontrado.");
+}
+	
+if (playerIdN===socket.id){
+var newPoints = textLine6.textContent;
+var pointsParagraph = document.getElementById("points");
+pointsParagraph.textContent =  newPoints;	
+gameCanvas.style.display = 'none';
+hexagonGroup.style.display = 'none';
+camera.style.display = 'none';
+document.getElementById("retryBox").style.visibility = "visible";
+var retryButton = document.getElementById("retryButton");
+retryButton.onclick = function() {
+console.log("Retry Game.");
+location.reload();
+};	
+}
+	
+console.log("ELIMINAR JUGADOR", playerIdN );
+	
+});	
+
+
+////FUNCION JUGADOR TEXTO ELIMINATED
+function playerText(x, y, name) {
+const playerText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+playerText.setAttribute('x', x);
+playerText.setAttribute('y', y); // Ajusta la posición del texto según sea necesario
+playerText.setAttribute('text-anchor', 'middle');
+playerText.setAttribute('fill', 'red');
+playerText.setAttribute('font-size', '16px');
+playerText.textContent =  name + " eliminated!";
+hexagonGroup.appendChild(playerText);
+// Después de 1 segundo, eliminar el texto
+setTimeout(() => {
+hexagonGroup.removeChild(playerText);
+}, 500);
+}		
+/////////////////////////////////////////////////////////////
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
+//END DOM	 
+});
+//END DOM
+	
+</script>
+
+<script src="createHexagons.js"></script>		
+<script src="cameraMov.js"></script>
+<script src="lienzoFunciones.js"></script>
+	
 </body>
 </html>
-
