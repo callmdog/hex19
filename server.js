@@ -147,31 +147,8 @@ let randomV = printRandomValue(1,  todosVertices.length  );
 let randomX = todosVertices[randomV].x;
 let randomY = todosVertices[randomV].y;
 console.log("RandomHex:", randomX, randomY);
-console.log(`LENGTH GreenCirclesS: ${greenCirclesS.length}:`);	
+console.log(`LENGTH GreenCirclesS: ${greenCirclesS.length}:`);		
 
-//HIGHSCORE LISTA AL CLIENTE!!!!!!!!
-//HIGHSCORE LISTA AL CLIENTE!!!!!!!!
-//HIGHSCORE LISTA AL CLIENTE!!!!!!!!
-socket.on('enviarLista', async () => {
-let jsonData = [];
-try {
-const highscores = await getCurrentHighscores();
-console.log('Enviar Lista HS');
-socket.emit('obtenerLista', highscores);
-console.log(`VALOR HS: ${highscores}`);
-//console.log('VALOR HS2:', JSON.stringify(highscores, null, 2));
-// Si deseas solo el contenido (los datos JSON), puedes hacer lo siguiente
-console.log('Highscores content:', JSON.parse(highscores.content));
-} catch (error) {
-console.error('Error fetching highscores:', error);
-}
-});		
-
-//DIBUJAR CIRCULOS VERDES	
-socket.on('dibujarVerdes', (numero) => {
-console.log(`DIBUJAR VERDES`);
-socket.emit('greenCirclesGenerated', greenCirclesS);
-});
 
 //CONFIRMATION NOMBRE PARA INICIAR SERVER
 /////////////////////////////////////////
@@ -213,110 +190,14 @@ console.log(`updatePlayersRequest Function`);
 io.emit('updatePlayers', players);
 });	
 
-//ACTUALIZAR POSICION JUGADOR	
-socket.on('updatePosition', function (position) {
-console.log(`Update Position: ${players[socket.id].nombre}`);
-// Actualiza la posición del jugador en el servidor
-players[socket.id].x = position.x;
-players[socket.id].y = position.y;
-players[socket.id].velocidad = position.velocidad;
-// Emite la actualización a todos los clientes
-socket.emit('updatePlayers', { [socket.id]: players[socket.id] });
-});
-
-//ACTUALIZAR VELOCIDAD JUGADOR	
-socket.on('updateVelocidadServer', function (position) {
-players[socket.id].velocidad = position.velocidad;
-// Emite la actualización a todos los clientes
-socket.emit('updateVelocidadCliente', { [socket.id]: { velocidad: players[socket.id].velocidad } });
-});	
-	
-//MOVER JUGADOR EN CLIENTE	
-socket.on('animationData', function (data) {
-const playerName = assignedColors.get(socket.id).name;
-const playerSpeed = players[socket.id].velocidad; // Acceso a la velocidad del jugador
-console.log(`Annimation Speed: ${playerSpeed}`);
-// Emitir datos a todos los clientes
-io.emit('animateBluePoint', { playerId: socket.id, data: data, playerName: playerName, playerSpeed: playerSpeed });
-});
-	
-///SISTEMA PUNTOS CUNADO CIRCULO VERDE HA SIDO COMIDO////////////////////
-socket.on('greenCircleEaten', () => {
-const playerId = socket.id;
-players[playerId].puntos += 1; 
-io.emit('updatePlayers', players); 
-// Actualizar la información de los jugadores para todos
-io.emit('updatePlayers2', players);
-console.log(`+ Puntos: ${players[playerId].puntos}, ${players[playerId].nombre} `);
-});	  
-
-//COLISION GREEN CIRCLE BORRAR EN TODOS CLIENTES	
-socket.on('collisionWithGreenCircle2', (collisionIndex, indexToRemove, comproid) => {
-var indice = greenCirclesS.findIndex(function(elemento) {
-return elemento.z === collisionIndex; });
-if (indice !== -1) {
-console.log("Elemento eliminado correctamente", greenCirclesS[indice]);
-greenCirclesS.splice(indice, 1);
-} else {
-console.log("No se encontró ningún elemento con z igual a 10"); }        
-io.emit('greenCircleCollision', collisionIndex, indexToRemove, comproid);
-console.log(`GreenCircleS QUEDAN: ${greenCirclesS.length}:`);	
-	
-// Comprobar si quedan menos de 5 círculos verdes
-if (greenCirclesS.length < 5) {
-io.emit('borrarGreen');
-greenCirclesS = [];	
-// Generar 15 círculos verdes nuevos
-const newGreenCircles = generateRandomLineCoordinates();
-for (let i = 0; i < newGreenCircles.length; i++) {
-newGreenCircles[i].z = greenCirclesS.length + i + 1; }
-// Agregar los nuevos círculos verdes a la lista existente
-greenCirclesS.push(...newGreenCircles);
-console.log(`GreenCircleS RENOVADO: ${greenCirclesS.length}:`);	
-
-io.emit('greenCirclesGenerated', greenCirclesS);
-}		
-});	
 
 ////////////////////////////////////////////////////////////////////////////    
-
-//ELIMINAR JUGADOR DE TODOS CLIENTES
-socket.on('eliminarJugador', (playerIdN) => {
-console.log('Usuario desconectado', playerIdN);
-assignedColors.delete(playerIdN);
-connectedUsers.delete(playerIdN);
-delete players[playerIdN]; 
-io.emit('updatePlayers', players); 
-io.emit('userCount', connectedUsers.size);
-io.emit('eliminarJugadorEnCliente', playerIdN);
-});		
-
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 //USUARIOS DESCONECTADOS SISTEMA DE DESCONEXION
 socket.on('disconnect', async () => {
-//HIGHSCORE SYSTEM // UPDATE Highscore.TXT
-if (players[socket.id] && players[socket.id].puntos) {
-console.log('Update highscore');
-const playerScore = {
-name: players[socket.id].nombre, score: players[socket.id].puntos, color: players[socket.id].color };
-try { await uploadUpdatedHighscores(playerScore);
-console.log('Highscore updated successfully for player:', playerScore);
-} catch (error) { console.error('Error updating highscore:', error.message); }	
-}
-//END HIGHSCORE SYSTEM // Highscore.txt	
 
-//ELIMINAR JUGADOR // FUNCION EN CLIENTE INDEX	
-io.emit('eliminarJugadorEnCliente', socket.id);
-console.log('Usuario desconectado', socket.id);
-assignedColors.delete(socket.id);
-connectedUsers.delete(socket.id);
-delete players[socket.id]; 
-io.emit('updatePlayers', players); 
-io.emit('updatePlayers2', players);
-io.emit('userCount', connectedUsers.size);
 });
-
 
 
 //END SOCKET CONNECTION////////////    ///////    ///////    ///////    ///////    ///////    ///////    ///////    ///////   
@@ -325,96 +206,6 @@ io.emit('userCount', connectedUsers.size);
 });
 });
 
-
-//HIGHSCORE SYSTEM SAVE, UPDATE!!! HIGH SCORE //// ///// ////
-//HIGHSCORE SYSTEM SAVE, UPDATE!!! HIGH SCORE //// ///// ////
-//HIGHSCORE SYSTEM SAVE, UPDATE!!! HIGH SCORE //// ///// ////
-//Proceso para hacerlo: desde Github web. settings. Create new personal Token. Repo checked. Copy Token API CODE. Paste Api Token code on Render Environment Key. And Code below change user info. highscore.txt
-
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const REPO_OWNER = 'callmdog';
-const REPO_NAME = 'hex2';
-const FILE_PATH = 'public/highscore.txt';
-
-async function getCurrentHighscores2() {
-const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
-try {
-const response = await axios.get(url, {
-headers: { 'Authorization': `token ${GITHUB_TOKEN}`,
-'Accept': 'application/vnd.github.v3+.raw' }
-});
-console.log('Response:', response.data);
-if (!response.data) { throw new Error('Response does not contain data.'); }
-// Si la respuesta es una cadena (contenido bruto)
-if (typeof response.data === 'string') { return { content: response.data, sha: null }; }
-// Si la respuesta es un objeto (metadatos del archivo)
-if (!response.data.content) { throw new Error('Response does not contain content.'); }
-const content = Buffer.from(response.data.content, 'base64').toString('utf-8');
-const sha = response.data.sha;
-if (!sha) { throw new Error('Response does not contain SHA.'); }
-return { content, sha };
-} catch (error) {
-console.error('Error in getCurrentHighscores:', error.response ? error.response.data : error.message);
-throw error; }
-}
-
-async function getCurrentHighscores() {
-const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
-try {
-const response = await axios.get(url, {
-headers: { 'Authorization': `token ${GITHUB_TOKEN}`,
-'Accept': 'application/vnd.github.v3+.raw' }
-});
-if (!response.data) { throw new Error('Response does not contain data.'); }
-let content;
-if (typeof response.data === 'string') { content = response.data; } else {
-if (!response.data.content) { throw new Error('Response does not contain content.'); }
-content = Buffer.from(response.data.content, 'base64').toString('utf-8');
-}
-// Divide el contenido en líneas y procesa cada línea como JSON
-const lines = content.trim().split('\n');
-let jsonData = [];
-lines.forEach(line => {
-try {
-const obj = JSON.parse(line);
-jsonData.push(obj);
-} catch (error) { console.error('Error al analizar JSON:', error); }
-});
-// Retorna los datos JSON procesados
-return jsonData;
-} catch (error) {
-console.error('Error in getCurrentHighscores:', error.response ? error.response.data : error.message);
-throw error; }
-}
-
-async function updateHighscores(newScore) {
-const { content, sha } = await getCurrentHighscores2();
-// Asegurarse de que newScore sea una cadena
-const scoreString = typeof newScore === 'object' ? JSON.stringify(newScore) : newScore;
-const updatedContent = content + `\n${scoreString}`;
-const base64Content = Buffer.from(updatedContent).toString('base64');
-return { base64Content, sha };
-}
-
-async function uploadUpdatedHighscores(newScore) {
-const { base64Content, sha } = await updateHighscores(newScore);
-if (!sha) { throw new Error('SHA is missing. Cannot update file without SHA.'); }
-const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
-const response = await axios.put(url, {
-message: 'Update highscore.txt', content: base64Content, sha: sha }, {
-headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Accept': 'application/vnd.github.v3+json' }
-});
-return response.data;
-}
-
-app.post('/update-highscore', async (req, res) => {
-const { score } = req.body;
-try {
-const result = await uploadUpdatedHighscores(score);
-res.json(result);
-} catch (error) { res.status(500).json({ error: error.message }); }
-});
-//END HIGHSCORE SYSTEM SAVE, UPDATE!!! HIGH SCORE //// ///// ////
 
 //PORT SERVER
 const PORT = process.env.PORT || 3000;
